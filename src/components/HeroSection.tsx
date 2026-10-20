@@ -1,75 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Calendar, Clock, MapPin, ChevronDown, Sparkles, ArrowUpRight } from 'lucide-react';
+import React from 'react';
+import { ChevronDown, ArrowUpRight } from 'lucide-react';
 import { CURATED_PHOTOGRAPHS } from '../data/curatedAssets';
 
 export const HeroSection: React.FC = () => {
-  // Target: Sunday, October 25, 2026, 12:08:00 PM IST
-  const targetDate = new Date('2026-10-25T12:08:00+05:30').getTime();
-
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-
-  useEffect(() => {
-    const calculateTime = () => {
-      const now = new Date().getTime();
-      const difference = targetDate - now;
-
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((difference % (1000 * 60)) / 1000),
-        });
-      }
-    };
-
-    calculateTime();
-    const interval = setInterval(calculateTime, 1000);
-    return () => clearInterval(interval);
-  }, [targetDate]);
-
-  // Generate .ics calendar invite
-  const downloadCalendarInvite = () => {
-    const icsContent = [
-      'BEGIN:VCALENDAR',
-      'VERSION:2.0',
-      'PRODID:-//The Sacred Kerala Wedding//Sethulekshmi and Aromal//EN',
-      'CALSCALE:GREGORIAN',
-      'METHOD:PUBLISH',
-      'BEGIN:VEVENT',
-      'UID:wedding-sethulekshmi-aromal-2026@kerala.in',
-      'DTSTART:20261025T063800Z', // 12:08 PM IST = 06:38 AM UTC
-      'DTEND:20261025T100000Z',   // 03:30 PM IST = 10:00 AM UTC
-      'SUMMARY:Sethulekshmi & Aromal | The Sacred Kerala Wedding',
-      'DESCRIPTION:Sacred Wedding Muhurtham (12:08 PM - 12:30 PM) followed by Traditional Kerala Sadya at Santhi Auditorium, Konni.',
-      'LOCATION:Santhi Auditorium, Eliyarackal, Konni, Pathanamthitta, Kerala 689691',
-      'STATUS:CONFIRMED',
-      'END:VEVENT',
-      'END:VCALENDAR',
-    ].join('\r\n');
-
-    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.setAttribute('download', 'Sethulekshmi_and_Aromal_Wedding.ics');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-    'Sethulekshmi & Aromal | The Sacred Kerala Wedding'
-  )}&dates=20261025T063800Z/20261025T100000Z&details=${encodeURIComponent(
-    'The sacred wedding ceremony of Sethulekshmi S & Aromal Kurup. Muhurtham: 12:08 PM - 12:30 PM IST, followed by Royal Kerala Sadya.'
-  )}&location=${encodeURIComponent(
-    'Santhi Auditorium, Eliyarackal, Konni, Pathanamthitta, Kerala 689691'
-  )}`;
-
   const heroPhoto = CURATED_PHOTOGRAPHS.hero;
 
   return (
@@ -143,18 +76,94 @@ export const HeroSection: React.FC = () => {
           textAlign: 'center',
         }}
       >
-        {/* Sacred Prelude Badge */}
+        {/* Lord Ganesha Auspicious Invocation Header */}
         <div
-          className="editorial-badge"
           style={{
-            marginBottom: '1.5rem',
-            animation: 'fadeIn 1s ease-out',
-            borderColor: 'rgba(168, 197, 189, 0.3)',
-            backgroundColor: 'rgba(12, 43, 38, 0.65)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: '1.6rem',
+            animation: 'fadeIn 1.2s ease-out',
           }}
         >
-          <Sparkles size={12} style={{ color: 'var(--gold-champagne)' }} />
-          <span>With Divine Blessings of God &amp; Family</span>
+          {/* Sacred Lord Ganesha Emblem - Prominent, Crisp & Elegant */}
+          <div
+            style={{
+              position: 'relative',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <img
+              src="/assets/images/lord_ganesha_gold.png"
+              alt="Lord Ganesha - Sree Ganeshaya Namah"
+              style={{
+                width: 'auto',
+                height: 'clamp(60px, 7.5vw, 74px)',
+                objectFit: 'contain',
+                filter: 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.65)) drop-shadow(0 1px 2px rgba(233, 200, 131, 0.25))',
+                transition: 'transform 0.3s ease, filter 0.3s ease',
+                cursor: 'default',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.04)';
+                e.currentTarget.style.filter = 'drop-shadow(0 3px 8px rgba(0, 0, 0, 0.8)) drop-shadow(0 1px 4px rgba(233, 200, 131, 0.4))';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)';
+                e.currentTarget.style.filter = 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.65)) drop-shadow(0 1px 2px rgba(233, 200, 131, 0.25))';
+              }}
+            />
+          </div>
+
+          {/* Delicate Traditional Invocation with Royal Hairline Accents */}
+          <div
+            style={{
+              marginTop: '0.45rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+            }}
+          >
+            {/* Left hairline accent */}
+            <span
+              style={{
+                display: 'inline-block',
+                width: 'clamp(24px, 4vw, 36px)',
+                height: '1px',
+                background: 'linear-gradient(90deg, transparent 0%, rgba(233, 200, 131, 0.45) 100%)',
+              }}
+            />
+            <span style={{ color: 'var(--gold-champagne, #E9C883)', opacity: 0.5, fontSize: '0.48rem' }}>✦</span>
+
+            <span
+              style={{
+                fontFamily: "'Noto Serif Malayalam', 'Manjari', 'Anek Malayalam', serif",
+                fontSize: 'clamp(0.66rem, 1.05vw, 0.74rem)',
+                fontWeight: 500,
+                letterSpacing: '0.05em',
+                color: 'rgba(233, 200, 131, 0.92)',
+                textShadow: '0 1px 6px rgba(0, 0, 0, 0.85)',
+                lineHeight: 1.2,
+              }}
+            >
+              ഓം ശ്രീ ഗണേശായ നമഃ
+            </span>
+
+            <span style={{ color: 'var(--gold-champagne, #E9C883)', opacity: 0.5, fontSize: '0.48rem' }}>✦</span>
+            {/* Right hairline accent */}
+            <span
+              style={{
+                display: 'inline-block',
+                width: 'clamp(24px, 4vw, 36px)',
+                height: '1px',
+                background: 'linear-gradient(90deg, rgba(233, 200, 131, 0.45) 0%, transparent 100%)',
+              }}
+            />
+          </div>
         </div>
 
         {/* Cinematic Names Lockup */}
@@ -238,37 +247,19 @@ export const HeroSection: React.FC = () => {
           </h1>
         </div>
 
-        {/* Warm Invitation Line */}
-        <p
-          style={{
-            fontFamily: 'var(--font-editorial)',
-            fontStyle: 'italic',
-            fontSize: 'clamp(1.05rem, 2.2vw, 1.3rem)',
-            color: '#F4EDE0',
-            maxWidth: '680px',
-            margin: '0 auto 1.8rem auto',
-            lineHeight: 1.5,
-            textShadow: '0 2px 14px rgba(0, 0, 0, 0.6)',
-          }}
-        >
-          Cordially invite you to celebrate our sacred wedding union &amp; Muhurtham
-        </p>
-
-        {/* Verified Date, Muhurtham & Clickable Venue Anchor Bar */}
+        {/* Verified Date, Muhurtham & Clickable Venue Anchor Bar - UI/UX Inspired by Reference Pill */}
         <div className="hero-anchor-bar">
           <div className="hero-anchor-item">
-            <Calendar size={16} style={{ color: 'var(--gold-champagne)', flexShrink: 0 }} />
             <span>Sunday, October 25, 2026</span>
           </div>
 
-          <span className="hero-anchor-dot" aria-hidden="true" />
+          <span className="hero-anchor-dot" aria-hidden="true">•</span>
 
           <div className="hero-anchor-item">
-            <Clock size={16} style={{ color: 'var(--gold-champagne)', flexShrink: 0 }} />
             <span>Muhurtham: 12:08 PM – 12:30 PM IST</span>
           </div>
 
-          <span className="hero-anchor-dot" aria-hidden="true" />
+          <span className="hero-anchor-dot" aria-hidden="true">•</span>
 
           {/* Interactive Verified Google Maps Venue Link */}
           <a
@@ -279,96 +270,95 @@ export const HeroSection: React.FC = () => {
             aria-label="View wedding venue Santhi Auditorium, Konni on Google Maps (opens in new tab)"
             title="Click to view Santhi Auditorium, Konni in Google Maps for directions"
           >
-            <MapPin size={15} style={{ color: 'var(--gold-champagne)', flexShrink: 0 }} />
             <span>Santhi Auditorium, Konni</span>
-            <ArrowUpRight size={13} style={{ color: 'var(--gold-champagne)', opacity: 0.85, flexShrink: 0 }} />
+            <ArrowUpRight size={10} style={{ color: 'var(--gold-champagne)', opacity: 0.9, flexShrink: 0 }} />
           </a>
         </div>
 
-        {/* Live Muhurtham Countdown Counter */}
-        <div
+        {/* Warm Invitation Line */}
+        <p
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, minmax(70px, 100px))',
-            gap: '12px',
-            marginBottom: '2.8rem',
+            fontFamily: "var(--font-editorial, 'Playfair Display', Georgia, serif)",
+            fontStyle: 'italic',
+            fontSize: 'clamp(1.1rem, 2.3vw, 1.4rem)',
+            color: '#FAF1DC',
+            maxWidth: '680px',
+            margin: '0 auto 1.4rem auto',
+            lineHeight: 1.55,
+            textShadow: '0 2px 14px rgba(0, 0, 0, 0.7)',
           }}
         >
-          {[
-            { label: 'DAYS', value: timeLeft.days },
-            { label: 'HOURS', value: timeLeft.hours },
-            { label: 'MINUTES', value: timeLeft.minutes },
-            { label: 'SECONDS', value: timeLeft.seconds },
-          ].map((item) => (
-            <div
-              key={item.label}
-              style={{
-                background: 'rgba(18, 60, 53, 0.55)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-                border: '1px solid rgba(168, 197, 189, 0.18)',
-                borderRadius: 'var(--radius-md)',
-                padding: '12px 6px',
-                textAlign: 'center',
-                boxShadow: '0 6px 20px rgba(0, 0, 0, 0.25)',
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: 'var(--font-editorial)',
-                  fontSize: 'clamp(1.6rem, 3.2vw, 2.4rem)',
-                  fontWeight: 600,
-                  color: '#FFFFFF',
-                  lineHeight: 1,
-                  marginBottom: '4px',
-                }}
-              >
-                {String(item.value).padStart(2, '0')}
-              </div>
-              <div
-                style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '0.62rem',
-                  letterSpacing: '0.22em',
-                  fontWeight: 700,
-                  color: '#A8C5BD',
-                }}
-              >
-                {item.label}
-              </div>
-            </div>
-          ))}
-        </div>
+          Cordially invite you to celebrate our sacred wedding union &amp; Muhurtham
+        </p>
 
-        {/* Action Controls: Add to Calendar */}
+        {/* Royal Golden Lotus Motif Divider */}
         <div
           style={{
             display: 'flex',
-            flexWrap: 'wrap',
             alignItems: 'center',
             justifyContent: 'center',
+            width: '100%',
+            maxWidth: '520px',
+            margin: '0 auto 1rem auto',
             gap: '14px',
           }}
+          aria-hidden="true"
         >
-          <button
-            onClick={downloadCalendarInvite}
-            className="btn-emerald-gold"
-            title="Download .ics calendar file"
+          <div
+            style={{
+              flex: 1,
+              height: '1px',
+              background: 'linear-gradient(90deg, transparent 0%, rgba(226, 179, 109, 0.6) 100%)',
+            }}
+          />
+          <svg
+            width="34"
+            height="24"
+            viewBox="0 0 34 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ flexShrink: 0 }}
           >
-            <Calendar size={15} />
-            Save Date (.ICS)
-          </button>
-
-          <a
-            href={googleCalendarUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-emerald-outline"
-            style={{ fontSize: '0.78rem' }}
-          >
-            Google Calendar
-          </a>
+            <defs>
+              <linearGradient id="heroLotusGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#FDF4E3" />
+                <stop offset="35%" stopColor="#E9C883" />
+                <stop offset="70%" stopColor="#CA944B" />
+                <stop offset="100%" stopColor="#966023" />
+              </linearGradient>
+            </defs>
+            {/* Center Upright Petal */}
+            <path
+              d="M 17,2 C 19.2,6 19.5,12.5 17,16 C 14.5,12.5 14.8,6 17,2 Z"
+              fill="url(#heroLotusGold)"
+            />
+            {/* Left Petal */}
+            <path
+              d="M 15.5,16 C 11.5,14 6.5,10.5 8,5.5 C 11.2,7 14.2,11.5 15.5,16 Z"
+              fill="url(#heroLotusGold)"
+            />
+            {/* Right Petal */}
+            <path
+              d="M 18.5,16 C 22.5,14 27.5,10.5 26,5.5 C 22.8,7 19.8,11.5 18.5,16 Z"
+              fill="url(#heroLotusGold)"
+            />
+            {/* Base Cup / Crescent */}
+            <path
+              d="M 11,16.5 C 13.5,18.5 20.5,18.5 23,16.5 C 21.5,19.2 12.5,19.2 11,16.5 Z"
+              fill="url(#heroLotusGold)"
+            />
+            {/* Base Pearl */}
+            <circle cx="17" cy="21.5" r="1.6" fill="url(#heroLotusGold)" />
+          </svg>
+          <div
+            style={{
+              flex: 1,
+              height: '1px',
+              background: 'linear-gradient(90deg, rgba(226, 179, 109, 0.6) 0%, transparent 100%)',
+            }}
+          />
         </div>
+
       </div>
 
       {/* Bottom Scroll Cue */}
@@ -409,68 +399,70 @@ export const HeroSection: React.FC = () => {
       {/* Inline styles for venue link, anchor bar & bounce animation */}
       <style>{`
         .hero-anchor-bar {
-          display: flex;
+          display: inline-flex;
           flex-wrap: wrap;
           align-items: center;
           justify-content: center;
-          gap: 12px 22px;
-          background: rgba(12, 43, 38, 0.76);
+          gap: 6px 14px;
+          background: rgba(12, 43, 38, 0.82);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(168, 197, 189, 0.24);
+          border: 1px solid rgba(226, 179, 109, 0.6);
+          box-shadow: 0 0 0 2px rgba(226, 179, 109, 0.12), 0 6px 20px rgba(4, 18, 16, 0.4);
           border-radius: 9999px;
-          padding: 8px 18px 8px 24px;
-          margin-bottom: 2.5rem;
-          box-shadow: 0 8px 30px rgba(4, 18, 16, 0.35);
+          padding: 5px 18px;
+          margin-bottom: 1.2rem;
           max-width: 95%;
           box-sizing: border-box;
+          transition: all 0.3s ease;
         }
 
         .hero-anchor-item {
           display: flex;
           align-items: center;
-          gap: 8px;
-          color: #FFFFFF;
+          color: #FDF4E3;
           font-family: var(--font-sans);
-          font-weight: 600;
-          font-size: 0.88rem;
-          letter-spacing: 0.03em;
+          font-weight: 700;
+          font-size: clamp(0.62rem, 0.88vw, 0.71rem);
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
           white-space: nowrap;
         }
 
         .hero-anchor-dot {
-          width: 4px;
-          height: 4px;
-          border-radius: 50%;
-          background-color: rgba(168, 197, 189, 0.4);
+          color: var(--gold-champagne, #E9C883);
+          font-size: 0.65rem;
+          opacity: 0.8;
           display: inline-block;
+          margin: 0 1px;
         }
 
         .hero-venue-link {
           display: inline-flex;
           align-items: center;
-          gap: 7px;
-          color: #F7E7CE;
+          gap: 4px;
+          color: #FAF1DC;
           font-family: var(--font-sans);
-          font-weight: 600;
-          font-size: 0.88rem;
-          letter-spacing: 0.03em;
+          font-weight: 700;
+          font-size: clamp(0.62rem, 0.88vw, 0.71rem);
+          letter-spacing: 0.11em;
+          text-transform: uppercase;
           text-decoration: none;
-          padding: 5px 12px;
+          padding: 2px 8px;
           border-radius: 9999px;
           background: rgba(214, 178, 101, 0.12);
-          border: 1px solid rgba(214, 178, 101, 0.35);
+          border: 1px solid rgba(214, 178, 101, 0.4);
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
           white-space: nowrap;
           cursor: pointer;
         }
 
         .hero-venue-link:hover {
-          background: rgba(214, 178, 101, 0.25);
+          background: rgba(214, 178, 101, 0.26);
           border-color: var(--gold-champagne);
           color: #FFFFFF;
           transform: translateY(-1px);
-          box-shadow: 0 4px 14px rgba(214, 178, 101, 0.25);
+          box-shadow: 0 3px 10px rgba(214, 178, 101, 0.22);
         }
 
         .hero-venue-link:focus-visible {
@@ -481,14 +473,15 @@ export const HeroSection: React.FC = () => {
         @media (max-width: 768px) {
           .hero-anchor-bar {
             border-radius: var(--radius-md);
-            padding: 12px 16px;
-            gap: 10px 14px;
+            padding: 8px 14px;
+            gap: 6px 10px;
           }
           .hero-anchor-dot {
             display: none;
           }
           .hero-anchor-item, .hero-venue-link {
-            font-size: 0.82rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
             white-space: normal;
             text-align: center;
           }

@@ -15,7 +15,7 @@ export const CinematicEpilogue: React.FC = () => {
       style={{
         position: 'relative',
         background: 'radial-gradient(ellipse at 50% 28%, #0F352E 0%, #0A2622 35%, #061A17 70%, #041210 100%)',
-        padding: '130px 0 60px 0',
+        padding: 'clamp(55px, 6.5vh, 80px) 0 50px 0',
         overflow: 'hidden',
         borderTop: '1px solid rgba(168, 197, 189, 0.14)',
       }}
@@ -92,35 +92,204 @@ export const CinematicEpilogue: React.FC = () => {
         {/* Curated Closing Visual Spread */}
         <div
           style={{
-            maxWidth: '1000px',
-            margin: '0 auto 80px auto',
+            maxWidth: '1240px',
+            margin: '0 auto 44px auto',
             textAlign: 'center',
           }}
         >
-          {/* Framed Twilight Master Portrait (Portrait 3:4) */}
+          {/* Master Showcase: Center-Balanced Grand Medallion Flanked by Royal Blessings */}
           <div
-            className="img-emerald-frame"
             style={{
-              maxWidth: '460px',
-              aspectRatio: '3 / 4',
-              borderRadius: 'var(--radius-lg)',
-              boxShadow: '0 24px 60px rgba(0, 0, 0, 0.65)',
-              border: '2px solid rgba(214, 178, 101, 0.45)',
-              margin: '0 auto 40px auto',
-              backgroundColor: '#071C19',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 'clamp(20px, 3.5vw, 48px)',
+              marginBottom: '32px',
+              flexWrap: 'wrap',
             }}
           >
-            <img
-              src={epiloguePhoto.webFile}
-              alt={epiloguePhoto.title}
-              loading="lazy"
+            {/* Left Blessing Wing: Sacred Heritage & Lineage */}
+            <div
               style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: epiloguePhoto.focalPosition || 'center 18%',
+                flex: '1 1 240px',
+                maxWidth: '290px',
+                textAlign: 'right',
+                padding: '24px 22px',
+                background: 'linear-gradient(135deg, rgba(15, 53, 46, 0.65) 0%, rgba(8, 32, 29, 0.8) 100%)',
+                border: '1px solid rgba(214, 178, 101, 0.28)',
+                borderRadius: '18px',
+                backdropFilter: 'blur(16px)',
+                boxShadow: '0 16px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
               }}
-            />
+            >
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  color: 'var(--gold-champagne)',
+                  fontSize: '0.72rem',
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  fontWeight: 700,
+                  marginBottom: '8px',
+                }}
+              >
+                <span>Sacred Lineage</span>
+                <span>✦</span>
+              </div>
+              <div
+                style={{
+                  fontFamily: 'var(--font-editorial)',
+                  fontSize: '1.25rem',
+                  color: '#FFFFFF',
+                  lineHeight: 1.25,
+                  marginBottom: '8px',
+                }}
+              >
+                Two Families, One Enduring Bond
+              </div>
+              <p
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.8rem',
+                  color: '#B0CBC4',
+                  lineHeight: 1.55,
+                  margin: 0,
+                }}
+              >
+                Rooted in centuries-old Kerala traditions, surrounded by the eternal blessings of our beloved elders.
+              </p>
+            </div>
+
+            {/* Center: Grand Circular Medallion (Large Imperial Circle Model) */}
+            <div
+              style={{
+                position: 'relative',
+                width: 'clamp(340px, 44vw, 540px)',
+                height: 'clamp(340px, 44vw, 540px)',
+                maxWidth: '92vw',
+                flex: '0 0 auto',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              {/* Outer Concentric Ornamental Dashed Gold Ring */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: '-22px',
+                  borderRadius: '50%',
+                  border: '1.5px dashed rgba(214, 178, 101, 0.5)',
+                  pointerEvents: 'none',
+                  animation: 'spinSlow 100s linear infinite',
+                }}
+              />
+
+              {/* Middle Luminous Kasavu Gold Ring */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: '-11px',
+                  borderRadius: '50%',
+                  border: '2px solid rgba(214, 178, 101, 0.75)',
+                  boxShadow: '0 0 45px rgba(214, 178, 101, 0.3), inset 0 0 25px rgba(214, 178, 101, 0.15)',
+                  pointerEvents: 'none',
+                }}
+              />
+
+              {/* 8 Auspicious Cardinal & Diagonal Star Pips */}
+              <div style={{ position: 'absolute', top: '-28px', color: 'rgba(233, 200, 131, 0.95)', fontSize: '13px', pointerEvents: 'none', textShadow: '0 0 10px rgba(214, 178, 101, 0.8)' }}>✦</div>
+              <div style={{ position: 'absolute', bottom: '-28px', color: 'rgba(233, 200, 131, 0.95)', fontSize: '13px', pointerEvents: 'none', textShadow: '0 0 10px rgba(214, 178, 101, 0.8)' }}>✦</div>
+              <div style={{ position: 'absolute', left: '-28px', color: 'rgba(233, 200, 131, 0.95)', fontSize: '13px', pointerEvents: 'none', textShadow: '0 0 10px rgba(214, 178, 101, 0.8)' }}>✦</div>
+              <div style={{ position: 'absolute', right: '-28px', color: 'rgba(233, 200, 131, 0.95)', fontSize: '13px', pointerEvents: 'none', textShadow: '0 0 10px rgba(214, 178, 101, 0.8)' }}>✦</div>
+              <div style={{ position: 'absolute', top: '7%', left: '7%', color: 'rgba(233, 200, 131, 0.75)', fontSize: '10px', pointerEvents: 'none' }}>✧</div>
+              <div style={{ position: 'absolute', top: '7%', right: '7%', color: 'rgba(233, 200, 131, 0.75)', fontSize: '10px', pointerEvents: 'none' }}>✧</div>
+              <div style={{ position: 'absolute', bottom: '7%', left: '7%', color: 'rgba(233, 200, 131, 0.75)', fontSize: '10px', pointerEvents: 'none' }}>✧</div>
+              <div style={{ position: 'absolute', bottom: '7%', right: '7%', color: 'rgba(233, 200, 131, 0.75)', fontSize: '10px', pointerEvents: 'none' }}>✧</div>
+
+              {/* Clean Large Circular Image Frame (Circle Model) */}
+              <div
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  border: '4px solid rgba(233, 200, 131, 0.92)',
+                  boxShadow: '0 25px 65px rgba(0, 0, 0, 0.8), inset 0 0 0 3px rgba(8, 32, 29, 0.85)',
+                  backgroundColor: '#FAF5EE',
+                }}
+              >
+                <img
+                  src="/assets/images/SA.png"
+                  alt="Sethulekshmi & Aromal"
+                  loading="lazy"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center center',
+                    display: 'block',
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Right Blessing Wing: The Muhurtham & Celebration Dawn */}
+            <div
+              style={{
+                flex: '1 1 240px',
+                maxWidth: '290px',
+                textAlign: 'left',
+                padding: '24px 22px',
+                background: 'linear-gradient(135deg, rgba(15, 53, 46, 0.65) 0%, rgba(8, 32, 29, 0.8) 100%)',
+                border: '1px solid rgba(214, 178, 101, 0.28)',
+                borderRadius: '18px',
+                backdropFilter: 'blur(16px)',
+                boxShadow: '0 16px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
+              }}
+            >
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  color: 'var(--gold-champagne)',
+                  fontSize: '0.72rem',
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  fontWeight: 700,
+                  marginBottom: '8px',
+                }}
+              >
+                <span>✦</span>
+                <span>Auspicious Dawn</span>
+              </div>
+              <div
+                style={{
+                  fontFamily: 'var(--font-editorial)',
+                  fontSize: '1.25rem',
+                  color: '#FFFFFF',
+                  lineHeight: 1.25,
+                  marginBottom: '8px',
+                }}
+              >
+                Sunday, October 25, 2026
+              </div>
+              <p
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.8rem',
+                  color: '#B0CBC4',
+                  lineHeight: 1.55,
+                  margin: 0,
+                }}
+              >
+                Santhi Auditorium, Konni, Pathanamthitta &bull; Stepping forward into a lifetime of shared laughter and love.
+              </p>
+            </div>
           </div>
 
           {/* Auspicious Divine Invocation Emblem (Inspired by Reference) */}

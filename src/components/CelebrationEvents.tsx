@@ -1,6 +1,7 @@
 import React from 'react';
 import { Calendar, Clock, MapPin, Navigation, Sparkles } from 'lucide-react';
 import { CURATED_PHOTOGRAPHS } from '../data/curatedAssets';
+import { WeddingMonogram } from './WeddingMonogram';
 
 export const CelebrationEvents: React.FC = () => {
   const events = [
@@ -67,19 +68,67 @@ export const CelebrationEvents: React.FC = () => {
       }}
     >
       <div className="editorial-container">
-        {/* Section Header with High Contrast Editorial Identity */}
-        <div style={{ maxWidth: '820px', marginBottom: '80px' }}>
-          <div className="editorial-badge">
-            <Sparkles size={13} style={{ color: '#1B4F46' }} />
-            <span>Itinerary of Celebrations</span>
+        {/* Section Header with Left Monogram Emblem and Right-Aligned Text Block */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '40px',
+            marginBottom: '80px',
+            flexWrap: 'wrap',
+          }}
+        >
+          {/* Left Side: S & A Monogram Crest (Same Clean UI) */}
+          <div
+            style={{
+              flex: '0 0 auto',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: 0,
+            }}
+          >
+            <WeddingMonogram size={300} theme="cream" />
           </div>
-          <h2 className="editorial-title" style={{ marginBottom: '1.2rem' }}>
-            The Sacred Celebrations
-          </h2>
-          <p className="editorial-subtitle">
-            Every moment has been thoughtfully orchestrated in accordance with Vedic tradition and familial hospitality.
-            Please join us for each auspicious chapter.
-          </p>
+
+          {/* Right Side: The Sacred Celebrations Text Block (Right-Aligned) */}
+          <div
+            style={{
+              flex: '1 1 520px',
+              maxWidth: '680px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+              textAlign: 'right',
+            }}
+          >
+            <div className="editorial-badge" style={{ marginLeft: 'auto', marginRight: 0 }}>
+              <Sparkles size={13} style={{ color: '#1B4F46' }} />
+              <span>Itinerary of Celebrations</span>
+            </div>
+            <h2
+              className="editorial-title"
+              style={{
+                marginBottom: '1.2rem',
+                textAlign: 'right',
+              }}
+            >
+              The Sacred Celebrations
+            </h2>
+            <p
+              className="editorial-subtitle"
+              style={{
+                textAlign: 'right',
+                marginLeft: 'auto',
+                marginRight: 0,
+              }}
+            >
+              Every moment has been thoughtfully orchestrated in accordance with Vedic tradition and familial hospitality.
+              Please join us for each auspicious chapter.
+            </p>
+          </div>
         </div>
 
         {/* 3 Bespoke Event Compositions */}

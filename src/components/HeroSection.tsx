@@ -158,20 +158,42 @@ export const HeroSection: React.FC = () => {
         </div>
 
         {/* Cinematic Names Lockup */}
-        <div style={{ maxWidth: '1080px', margin: '0 auto 1.8rem auto' }}>
+        <div
+          style={{
+            maxWidth: '1080px',
+            margin: '0 auto 1.8rem auto',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+          }}
+        >
           <h1
             style={{
-              fontFamily: 'var(--font-editorial)',
-              fontSize: 'clamp(3rem, 7.8vw, 6.8rem)',
-              fontWeight: 500,
-              lineHeight: 0.98,
-              letterSpacing: '-0.02em',
+              fontFamily: "var(--font-england-hand, 'England Hand DB', 'England Hand', cursive)",
+              fontSize: 'clamp(3.6rem, 9vw, 7.6rem)',
+              fontWeight: 400,
+              lineHeight: 1.12,
+              letterSpacing: '0.01em',
               color: '#FFFFFF',
-              textShadow: '0 4px 30px rgba(0, 0, 0, 0.6)',
+              textShadow: '0 4px 30px rgba(0, 0, 0, 0.7)',
               margin: 0,
+              display: 'inline-block',
             }}
           >
-            Sethulekshmi
+            <span
+              style={{
+                fontFamily: "'Great Vibes', 'Alex Brush', cursive",
+                fontSize: '1.08em',
+                marginRight: '-0.02em',
+                display: 'inline-block',
+                verticalAlign: 'baseline',
+              }}
+            >
+              S
+            </span>
+            ethulekshmi
           </h1>
           <div
             style={{
@@ -181,23 +203,38 @@ export const HeroSection: React.FC = () => {
               color: 'var(--gold-champagne)',
               margin: '0.2rem 0',
               textShadow: '0 2px 20px rgba(214, 178, 101, 0.4)',
+              lineHeight: 1,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
             &amp;
           </div>
           <h1
             style={{
-              fontFamily: 'var(--font-editorial)',
-              fontSize: 'clamp(3rem, 7.8vw, 6.8rem)',
-              fontWeight: 500,
-              lineHeight: 0.98,
-              letterSpacing: '-0.02em',
+              fontFamily: "var(--font-england-hand, 'England Hand DB', 'England Hand', cursive)",
+              fontSize: 'clamp(3.6rem, 9vw, 7.6rem)',
+              fontWeight: 400,
+              lineHeight: 1.12,
+              letterSpacing: '0.01em',
               color: '#FFFFFF',
-              textShadow: '0 4px 30px rgba(0, 0, 0, 0.6)',
+              textShadow: '0 4px 30px rgba(0, 0, 0, 0.7)',
               margin: 0,
+              display: 'inline-block',
+              transform: 'translateX(-0.035em)',
             }}
           >
-            Aromal
+            <span
+              style={{
+                display: 'inline-block',
+                WebkitTextStroke: '0.6px #FFFFFF',
+                paintOrder: 'stroke fill',
+              }}
+            >
+              A
+            </span>
+            romal
           </h1>
         </div>
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Compass, Sparkles } from 'lucide-react';
 import { CURATED_PHOTOGRAPHS } from '../data/curatedAssets';
+import { WeddingMonogram } from './WeddingMonogram';
 
 export const UnionSpread: React.FC = () => {
   const primaryPhoto = CURATED_PHOTOGRAPHS.storyPrimary;
@@ -28,22 +29,48 @@ export const UnionSpread: React.FC = () => {
       />
 
       <div className="editorial-container" style={{ position: 'relative', zIndex: 10 }}>
-        {/* Section Header */}
-        <div style={{ maxWidth: '820px', marginBottom: '70px' }}>
-          <div className="editorial-badge">
-            <Compass size={13} style={{ color: 'var(--gold-champagne)' }} />
-            <span>The Sacred Union &amp; Heritage</span>
+        {/* Section Header with Right S & A Monogram Crest (Clean & Borderless) */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '40px',
+            marginBottom: '70px',
+            flexWrap: 'wrap',
+          }}
+        >
+          {/* Left Text Block */}
+          <div style={{ flex: '1 1 520px', maxWidth: '680px' }}>
+            <div className="editorial-badge">
+              <Compass size={13} style={{ color: 'var(--gold-champagne)' }} />
+              <span>The Sacred Union &amp; Heritage</span>
+            </div>
+            <h2
+              className="editorial-title"
+              style={{ marginBottom: '1.2rem', color: '#FFFFFF' }}
+            >
+              Two Lineages, One Eternal Tapestry
+            </h2>
+            <p className="editorial-subtitle" style={{ color: '#B2C7C1' }}>
+              Rooted in the timeless traditions of Kerala and surrounded by the love of our families,
+              Sethulekshmi and Aromal celebrate the sacred coming together of two homes, two legacies, and a lifetime of devotion.
+            </p>
           </div>
-          <h2
-            className="editorial-title"
-            style={{ marginBottom: '1.2rem', color: '#FFFFFF' }}
+
+          {/* Right S & A Monogram Crest (Clean & Borderless) */}
+          <div
+            style={{
+              flex: '0 0 auto',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto',
+            }}
           >
-            Two Lineages, One Eternal Tapestry
-          </h2>
-          <p className="editorial-subtitle" style={{ color: '#B2C7C1' }}>
-            Rooted in the timeless traditions of Kerala and surrounded by the love of our families,
-            Sethulekshmi and Aromal celebrate the sacred coming together of two homes, two legacies, and a lifetime of devotion.
-          </p>
+            <WeddingMonogram size={320} />
+          </div>
         </div>
 
         {/* Master Editorial Layout: Diptych & Asymmetric Lineage Grid */}

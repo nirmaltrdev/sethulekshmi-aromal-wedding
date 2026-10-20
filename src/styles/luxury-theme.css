@@ -3,6 +3,24 @@
    Royal Forest Teal, Imperial Emerald, Luminous Cream & Warm Champagne
    ==================================================================== */
 
+@font-face {
+  font-family: 'England Hand DB';
+  src: url('/assets/fonts/england.woff') format('woff'),
+       url('/assets/fonts/england.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'England Hand';
+  src: url('/assets/fonts/england.woff') format('woff'),
+       url('/assets/fonts/england.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Jewel Palette: Deep Royal Teal & Emerald */
   --teal-deep: #08201D;
@@ -35,6 +53,7 @@
   --font-decorative: 'Cinzel Decorative', 'Playfair Display', serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-modern: 'Syne', 'Plus Jakarta Sans', sans-serif;
+  --font-england-hand: 'England Hand DB', 'England Hand', 'Playfair Display', cursive;
 
   /* Spacing & Geometry */
   --container-max: 1380px;

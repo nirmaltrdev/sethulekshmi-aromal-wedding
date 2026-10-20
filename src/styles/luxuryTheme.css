@@ -1,0 +1,96 @@
+:root {
+  --font-display: 'Cinzel Decorative', serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-script: 'Italianno', cursive;
+
+  --color-canvas: #08090B;
+  --color-surface: #101216;
+  --color-surface-elevated: #161920;
+  --color-surface-translucent: rgba(16, 18, 22, 0.78);
+
+  --color-gold: #D4AF37;
+  --color-gold-light: #F4E8C1;
+  --color-gold-bright: #F5D77F;
+  --color-gold-dark: #8C6D23;
+
+  --color-kasavu-silk: #FAF8F5;
+  --color-kasavu-cream: #F3EFE6;
+  --color-kasavu-gold: #C5A059;
+
+  --color-sacred-emerald: #143224;
+  --color-sacred-vermilion: #7A1C22;
+
+  --gold-gradient: linear-gradient(135deg, #F5D77F 0%, #D4AF37 50%, #996515 100%);
+  --gold-foil: linear-gradient(90deg, #FBF6E9 0%, #D4AF37 25%, #FFF9E6 50%, #B8860B 75%, #FBF6E9 100%);
+
+  --border-gold-hairline: rgba(212, 175, 55, 0.22);
+  --border-gold-subtle: rgba(212, 175, 55, 0.12);
+  --border-gold-prominent: rgba(212, 175, 55, 0.45);
+
+  --shadow-luxury: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(212, 175, 55, 0.05);
+  --shadow-glow: 0 0 35px rgba(212, 175, 55, 0.2);
+}
+
+.font-display { font-family: var(--font-display); }
+.font-serif { font-family: var(--font-serif); }
+.font-sans { font-family: var(--font-sans); }
+.font-script { font-family: var(--font-script); }
+
+.text-gold-gradient {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gold-foil {
+  background: var(--gold-foil);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 6s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.glass-luxury {
+  background: var(--color-surface-translucent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-gold-hairline);
+  box-shadow: var(--shadow-luxury);
+}
+
+.glass-luxury-interactive {
+  background: var(--color-surface-translucent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-gold-hairline);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-luxury-interactive:hover {
+  border-color: var(--border-gold-prominent);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), var(--shadow-glow);
+  transform: translateY(-3px);
+}
+
+.kasavu-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--color-gold) 50%, transparent 100%);
+  opacity: 0.4;
+  margin: 2rem 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

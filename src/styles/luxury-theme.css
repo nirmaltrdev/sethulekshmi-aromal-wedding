@@ -1,0 +1,308 @@
+/* ====================================================================
+   PREMIUM CONTEMPORARY CINEMATIC WEDDING DESIGN SYSTEM
+   Royal Forest Teal, Imperial Emerald, Luminous Cream & Warm Champagne
+   ==================================================================== */
+
+:root {
+  /* Jewel Palette: Deep Royal Teal & Emerald */
+  --teal-deep: #08201D;
+  --teal-royal: #0C2B26;
+  --teal-surface: #123C35;
+  --teal-elevated: #1B4F46;
+  --teal-accent: #235C52;
+  --teal-border: rgba(168, 197, 189, 0.22);
+  --teal-border-subtle: rgba(255, 255, 255, 0.08);
+
+  /* Luminous Contrast: Warm Cream Alabaster & Linen */
+  --cream-pure: #FAF7F0;
+  --cream-warm: #F2ECE0;
+  --cream-card: #FFFFFF;
+  --cream-border: rgba(12, 43, 38, 0.12);
+  --cream-text: #08201D;
+  --cream-muted: #4A635D;
+
+  /* Metallic Accents: Warm Champagne & Kerala Kasavu Gold */
+  --gold-champagne: #D6B265;
+  --gold-kasavu: #C5A059;
+  --gold-luminous: #F3E6C8;
+  --gold-deep: #9E7B35;
+  --copper-warm: #C88252;
+  --copper-soft: rgba(200, 130, 82, 0.16);
+
+  /* Typography Stacks */
+  --font-editorial: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-decorative: 'Cinzel Decorative', 'Playfair Display', serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-modern: 'Syne', 'Plus Jakarta Sans', sans-serif;
+
+  /* Spacing & Geometry */
+  --container-max: 1380px;
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+}
+
+/* Base Resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--teal-deep);
+  color: #F7F4EE;
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow-x: hidden;
+  line-height: 1.6;
+  background-color: var(--teal-deep);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: var(--teal-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: #184A41;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-champagne);
+}
+
+/* Typography Classes */
+.font-editorial {
+  font-family: var(--font-editorial);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-decorative {
+  font-family: var(--font-decorative);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-modern {
+  font-family: var(--font-modern);
+}
+
+.editorial-caps {
+  font-family: var(--font-sans);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.editorial-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--teal-border);
+  background: rgba(35, 92, 82, 0.3);
+  color: var(--gold-luminous);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+.editorial-title {
+  font-family: var(--font-editorial);
+  font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: #FFFFFF;
+}
+
+.editorial-subtitle {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: #B2C7C1;
+  max-width: 660px;
+}
+
+/* Editorial Contrast Theme: Luminous Cream & Ivory Mode */
+.theme-luminous-cream {
+  background-color: var(--cream-pure);
+  color: var(--cream-text);
+  position: relative;
+}
+
+.theme-luminous-cream .editorial-title {
+  color: #0A2621;
+}
+
+.theme-luminous-cream .editorial-subtitle {
+  color: var(--cream-muted);
+}
+
+.theme-luminous-cream .editorial-badge {
+  border-color: rgba(12, 43, 38, 0.2);
+  background: rgba(12, 43, 38, 0.05);
+  color: #123C35;
+}
+
+/* Container Constraint */
+.editorial-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .editorial-container {
+    padding: 0 3rem;
+  }
+}
+
+/* Luxury Interactive Buttons */
+.btn-emerald-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 30px;
+  background: linear-gradient(135deg, #ECC875 0%, #C5A059 100%);
+  color: #08201D;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(214, 178, 101, 0.25);
+}
+
+.btn-emerald-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(214, 178, 101, 0.42);
+  color: #000000;
+}
+
+.btn-emerald-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 28px;
+  background: rgba(18, 60, 53, 0.4);
+  color: #EFE8DA;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--teal-border);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.35s ease;
+  backdrop-filter: blur(12px);
+}
+
+.btn-emerald-outline:hover {
+  background: rgba(35, 92, 82, 0.6);
+  border-color: var(--gold-champagne);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* Image Presentation Frames */
+.img-emerald-frame {
+  overflow: hidden;
+  position: relative;
+  background-color: var(--teal-surface);
+  border-radius: var(--radius-md);
+  width: 100%;
+  max-width: 100%;
+}
+
+.img-emerald-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.img-emerald-frame:hover img {
+  transform: scale(1.035);
+}
+
+/* Orientation-specific aspect ratio containers */
+.img-frame-portrait {
+  aspect-ratio: 2 / 3;
+}
+
+.img-frame-landscape {
+  aspect-ratio: 3 / 2;
+}
+
+.img-frame-classic {
+  aspect-ratio: 4 / 5;
+}
+
+/* Universal Center-Balanced Layout Helpers */
+.center-balanced-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 32px;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Subtle Hairline Dividers */
+.hairline-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(214, 178, 101, 0.35), transparent);
+  margin: 3.5rem 0;
+  width: 100%;
+}
+
+/* Frosted Teal Card */
+.glass-teal-card {
+  background: rgba(18, 60, 53, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--teal-border);
+  border-radius: var(--radius-lg);
+}
+
+/* Ambient Radial Glow */
+.ambient-glow-teal {
+  position: absolute;
+  width: min(600px, 90vw);
+  height: min(600px, 90vw);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(35, 92, 82, 0.35) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+

@@ -1,10 +1,7 @@
 import React from 'react';
 import { ArrowUp, Phone, Sparkles } from 'lucide-react';
-import { CURATED_PHOTOGRAPHS } from '../data/curatedAssets';
 
 export const CinematicEpilogue: React.FC = () => {
-  const epiloguePhoto = CURATED_PHOTOGRAPHS.epilogue;
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

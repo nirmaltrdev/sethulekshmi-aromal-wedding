@@ -311,10 +311,10 @@ export const CelebrationEvents: React.FC = () => {
       category: 'Blessing Ceremony',
       title: 'Pre-Wedding Gathering',
       date: 'Saturday, October 24, 2026',
-      time: '6:00 PM Onwards',
+      time: '3:00 PM Onwards',
       countdownDate: '2026-10-24T18:00:00+05:30',
-      venue: 'Suresh Bhavan',
-      location: 'Achencovil, Kollam District',
+      venue: 'Mavelil House',
+      location: 'Elakolloor(po) Konni, Pathanamthitta',
       description: 'An intimate familial gathering to invoke sacred blessings and commence the matrimonial festivities with prayers, laughter, and cherished customs.',
       photo: CURATED_PHOTOGRAPHS.preWedding,
       dressCode: {

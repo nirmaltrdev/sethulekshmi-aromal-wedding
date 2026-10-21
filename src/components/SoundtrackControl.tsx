@@ -2,71 +2,41 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Music, Volume2, VolumeX } from 'lucide-react';
 
 export const SoundtrackControl: React.FC = () => {
-  const [isAvailable, setIsAvailable] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const hasAttemptedAutoplayRef = useRef<boolean>(false);
   const userExplicitlyPausedRef = useRef<boolean>(false);
+  const cleanupListenersRef = useRef<(() => void) | null>(null);
 
   const audioSrc = '/assets/audio/weddingsong.mp3';
 
-  // Check if the requested authorized audio file exists on the server with valid audio MIME type
-  useEffect(() => {
-    let isMounted = true;
-    const checkAudioAvailability = async () => {
-      try {
-        const response = await fetch(audioSrc, { method: 'HEAD' });
-        const contentType = response.headers.get('content-type') || '';
-        const isAudioMime =
-          response.ok &&
-          !contentType.includes('text/html') &&
-          (contentType.startsWith('audio/') || contentType.includes('audio') || contentType.includes('octet-stream'));
-
-        if (isAudioMime && isMounted) {
-          setIsAvailable(true);
-        } else if (isMounted) {
-          setIsAvailable(false);
-        }
-      } catch {
-        if (isMounted) setIsAvailable(false);
-      }
-    };
-
-    checkAudioAvailability();
-    return () => {
-      isMounted = false;
-    };
-  }, [audioSrc]);
-
-  // Clean up audio element on unmount
-  useEffect(() => {
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.src = '';
-        audioRef.current = null;
-      }
-    };
-  }, []);
-
-  const getOrCreateAudio = () => {
+  // Initialize or retrieve the single Audio instance
+  const getOrCreateAudio = (): HTMLAudioElement => {
     if (!audioRef.current) {
       const audio = new Audio(audioSrc);
       audio.volume = 0.65;
       audio.preload = 'auto';
-      audio.loop = true; // Full song loop without cutting
+      audio.loop = true;
 
-      audio.addEventListener('ended', () => {
-        if (!audioRef.current) return;
-        audioRef.current.currentTime = 0;
-        audioRef.current.play().catch(() => setIsPlaying(false));
+      audio.addEventListener('play', () => {
+        setIsPlaying(true);
       });
 
-      audio.addEventListener('pause', () => setIsPlaying(false));
-      audio.addEventListener('play', () => setIsPlaying(true));
+      audio.addEventListener('pause', () => {
+        setIsPlaying(false);
+      });
+
+      audio.addEventListener('ended', () => {
+        if (audioRef.current && !userExplicitlyPausedRef.current) {
+          audioRef.current.currentTime = 0;
+          audioRef.current.play().catch(() => setIsPlaying(false));
+        }
+      });
+
       audio.addEventListener('error', (e) => {
-        console.warn('Playback error or audio not accessible:', e);
+        console.warn('Audio playback error:', e);
+        setHasError(true);
         setIsPlaying(false);
       });
 
@@ -75,92 +45,122 @@ export const SoundtrackControl: React.FC = () => {
     return audioRef.current;
   };
 
-  // Attempt autoplay with sound on guest's initial visit once the asset is ready
+  // Autoplay attempt on page load and refresh
   useEffect(() => {
-    if (!isAvailable || hasAttemptedAutoplayRef.current) return;
-    hasAttemptedAutoplayRef.current = true;
-
     const audio = getOrCreateAudio();
+    userExplicitlyPausedRef.current = false;
+    setHasError(false);
 
-    const executeAutoplay = async () => {
-      if (userExplicitlyPausedRef.current) return;
+    let isStarted = false;
+
+    const interactionEvents: (keyof WindowEventMap)[] = [
+      'pointerdown',
+      'touchstart',
+      'touchend',
+      'mousedown',
+      'click',
+      'keydown',
+    ];
+
+    const removeInteractionListeners = () => {
+      interactionEvents.forEach((evt) => {
+        window.removeEventListener(evt, handleUserInteraction, true);
+        document.removeEventListener(evt, handleUserInteraction, true);
+      });
+      cleanupListenersRef.current = null;
+    };
+
+    const handleUserInteraction = async () => {
+      if (userExplicitlyPausedRef.current || isStarted) {
+        removeInteractionListeners();
+        return;
+      }
 
       try {
+        audio.currentTime = 0;
+        audio.muted = false;
         await audio.play();
+        isStarted = true;
         setIsPlaying(true);
+        removeInteractionListeners();
       } catch {
-        // Autoplay blocked by browser policy (e.g. user gesture required).
-        // Gracefully keep player in ready-to-play standby state.
-        setIsPlaying(false);
+        // Keep listeners active to retry on next user interaction
       }
     };
 
-    if (audio.readyState >= 1) {
-      executeAutoplay();
-    } else {
-      audio.addEventListener('loadedmetadata', executeAutoplay, { once: true });
-    }
-  }, [isAvailable]);
+    const attemptAutoplay = async () => {
+      if (userExplicitlyPausedRef.current || isStarted) return;
+
+      try {
+        audio.muted = false;
+        await audio.play();
+        isStarted = true;
+        setIsPlaying(true);
+        removeInteractionListeners();
+      } catch (err) {
+        // Autoplay policy prevented immediate unmuted sound without prior user activation.
+        setIsPlaying(false);
+
+        // Pre-warm audio in muted mode so it's fully loaded and ready to sound instantly on first touch
+        try {
+          if (audio.paused) {
+            audio.muted = true;
+            await audio.play();
+          }
+        } catch {
+          // Standby
+        }
+      }
+    };
+
+    // 1. Attach listeners immediately on mount across window & document
+    interactionEvents.forEach((evt) => {
+      window.addEventListener(evt, handleUserInteraction, { capture: true, passive: true });
+      document.addEventListener(evt, handleUserInteraction, { capture: true, passive: true });
+    });
+    cleanupListenersRef.current = removeInteractionListeners;
+
+    // 2. Attempt immediate unmuted playback
+    attemptAutoplay();
+
+    // 3. Re-attempt when audio buffer is ready if it wasn't preloaded
+    const onCanPlay = () => {
+      if (!isStarted && !userExplicitlyPausedRef.current) {
+        attemptAutoplay();
+      }
+    };
+    audio.addEventListener('canplay', onCanPlay, { once: true });
+
+    return () => {
+      removeInteractionListeners();
+      audio.removeEventListener('canplay', onCanPlay);
+    };
+  }, []);
 
   const toggleSoundtrack = async () => {
     const audio = getOrCreateAudio();
 
-    try {
-      if (isPlaying) {
-        userExplicitlyPausedRef.current = true;
-        audio.pause();
-        setIsPlaying(false);
-      } else {
-        userExplicitlyPausedRef.current = false;
+    if (isPlaying) {
+      userExplicitlyPausedRef.current = true;
+      if (cleanupListenersRef.current) {
+        cleanupListenersRef.current();
+      }
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      userExplicitlyPausedRef.current = false;
+      try {
         await audio.play();
         setIsPlaying(true);
+        if (cleanupListenersRef.current) {
+          cleanupListenersRef.current();
+        }
+      } catch (err) {
+        console.warn('Manual playback error:', err);
+        setIsPlaying(false);
       }
-    } catch (err) {
-      console.warn('Audio playback restriction or interaction required:', err);
-      setIsPlaying(false);
     }
   };
-
-  // If the song is unavailable, render development badge in DEV, null in production
-  if (!isAvailable) {
-    if (import.meta.env.DEV) {
-      return (
-        <aside
-          aria-label="Soundtrack Development Status"
-          style={{
-            position: 'fixed',
-            bottom: 'clamp(20px, 3.5vh, 32px)',
-            right: 'clamp(18px, 3vw, 32px)',
-            zIndex: 90,
-          }}
-        >
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '7px 14px',
-              background: 'rgba(12, 43, 38, 0.92)',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
-              border: '1px dashed rgba(214, 178, 101, 0.45)',
-              borderRadius: '9999px',
-              color: '#D4E2DE',
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.72rem',
-              fontWeight: 500,
-              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)',
-            }}
-            title="Place your authorized MP3 recording at: public/assets/audio/weddingsong.mp3"
-          >
-            <Music size={13} style={{ color: 'var(--gold-champagne)', opacity: 0.7 }} />
-            <span>Soundtrack: Awaiting <code style={{ color: 'var(--gold-champagne)', fontSize: '0.68rem' }}>weddingsong.mp3</code></span>
-          </div>
-        </aside>
-      );
-    }
-    return null;
-  }
 
   return (
     <aside
@@ -184,7 +184,7 @@ export const SoundtrackControl: React.FC = () => {
         }
         title={
           isPlaying
-            ? 'Playing: Wedding Song — Click to pause'
+            ? 'Playing: Thandhaay Song — Click to pause'
             : 'Play Wedding Soundtrack'
         }
         style={{
@@ -200,17 +200,17 @@ export const SoundtrackControl: React.FC = () => {
           WebkitBackdropFilter: 'blur(20px)',
           border: isPlaying
             ? '1.2px solid rgba(214, 178, 101, 0.85)'
-            : '1px solid rgba(214, 178, 101, 0.45)',
+            : '1px solid rgba(214, 178, 101, 0.55)',
           borderRadius: '9999px',
           boxShadow: isPlaying
             ? '0 8px 30px rgba(0, 0, 0, 0.45), 0 0 18px rgba(214, 178, 101, 0.28)'
-            : '0 8px 24px rgba(0, 0, 0, 0.35)',
+            : '0 8px 24px rgba(0, 0, 0, 0.35), 0 0 12px rgba(214, 178, 101, 0.15)',
           cursor: 'pointer',
           color: '#FAF7F0',
           transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
           outline: 'none',
         }}
-        className="soundtrack-floating-btn"
+        className={`soundtrack-floating-btn ${!isPlaying ? 'soundtrack-idle-pulse' : ''}`}
       >
         {isPlaying ? (
           <>
@@ -255,7 +255,11 @@ export const SoundtrackControl: React.FC = () => {
                 whiteSpace: 'nowrap',
               }}
             >
-              {isHovered ? 'Play Soundtrack' : 'Soundtrack'}
+              {hasError
+                ? 'Soundtrack Unavailable'
+                : isHovered
+                ? 'Play Soundtrack'
+                : 'Soundtrack'}
             </span>
             <VolumeX size={13} style={{ color: 'rgba(214, 178, 101, 0.65)', marginLeft: '2px' }} />
           </>
@@ -270,6 +274,21 @@ export const SoundtrackControl: React.FC = () => {
         .soundtrack-floating-btn:focus-visible {
           outline: 2px solid var(--gold-champagne);
           outline-offset: 3px;
+        }
+
+        .soundtrack-idle-pulse {
+          animation: soundtrackGlowPulse 2.8s ease-in-out infinite;
+        }
+
+        @keyframes soundtrackGlowPulse {
+          0%, 100% {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 8px rgba(214, 178, 101, 0.15);
+            border-color: rgba(214, 178, 101, 0.45);
+          }
+          50% {
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45), 0 0 16px rgba(214, 178, 101, 0.35);
+            border-color: rgba(214, 178, 101, 0.85);
+          }
         }
 
         @media (max-width: 768px) {

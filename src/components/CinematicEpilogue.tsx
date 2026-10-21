@@ -479,10 +479,10 @@ export const CinematicEpilogue: React.FC = () => {
                     marginTop: '2px',
                   }}
                 >
-                  +91 94471 23456
+                  +91 94470 73184
                 </a>
                 <div style={{ fontSize: '0.78rem', color: '#88A39C', marginTop: '2px' }}>
-                  Suresh Bhavan, Achencovil, Kollam
+                  Suresh Bhavan, Achencovil, Kollam,
                 </div>
               </div>
             </div>
@@ -521,7 +521,7 @@ export const CinematicEpilogue: React.FC = () => {
                     marginTop: '2px',
                   }}
                 >
-                  +91 94472 34567
+                  +91 9447141979
                 </a>
                 <div style={{ fontSize: '0.78rem', color: '#88A39C', marginTop: '2px' }}>
                   Thempamkoottathil (H), Iravon, Konni

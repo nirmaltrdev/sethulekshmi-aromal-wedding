@@ -177,13 +177,13 @@ export const weddingContent = {
       {
         name: "Mr. Suresh Madhavan Nair",
         role: "Bride's Father (Achencovil)",
-        phone: "+91 94471 23456",
+        phone: "+91 94470 73184",
         whatsappClean: "919447123456",
       },
       {
         name: "Mr. Santhosh Kurup",
         role: "Groom's Father (Konni)",
-        phone: "+91 94472 34567",
+        phone: "+91 9447141979",
         whatsappClean: "919447234567",
       },
     ],

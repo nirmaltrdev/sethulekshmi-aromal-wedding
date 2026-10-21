@@ -38,8 +38,8 @@ All details have been extracted directly from the official wedding invitation ma
   3. **The Traditional Kerala Sadhya**: Sunday, Oct 25, 2026 | 12:45 PM – 3:00 PM | Santhi Auditorium Dining Hall, Konni
   4. **Evening Reception & Dinner Feast**: Sunday, Oct 25, 2026 | 6:30 PM onwards | Thempamkoottathil (H), Iravon, Konni
 - **Host Contacts**:
-  - Mr. Suresh Madhavan Nair: +91 94471 23456
-  - Mr. Santhosh Kurup: +91 94472 34567
+  - Mr. Suresh Madhavan Nair: +91 94470 73184
+  - Mr. Santhosh Kurup: +91 9447141979
 
 ---
 

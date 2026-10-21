@@ -9,11 +9,7 @@ export const SoundtrackControl: React.FC = () => {
   const hasAttemptedAutoplayRef = useRef<boolean>(false);
   const userExplicitlyPausedRef = useRef<boolean>(false);
 
-  const audioSrc = '/assets/audio/seetha_kalyana_vaibhogame.mp3';
-
-  // Segment boundaries: 00:54 to 01:53 (59 seconds duration)
-  const SEGMENT_START = 54;
-  const SEGMENT_END = 113;
+  const audioSrc = '/assets/audio/weddingsong.mp3';
 
   // Check if the requested authorized audio file exists on the server with valid audio MIME type
   useEffect(() => {
@@ -59,21 +55,11 @@ export const SoundtrackControl: React.FC = () => {
       const audio = new Audio(audioSrc);
       audio.volume = 0.65;
       audio.preload = 'auto';
-      audio.loop = false; // Custom 59-second segment loop
-
-      // Segment boundary enforcement: loop at 1:53 (113s) back to 0:54 (54s)
-      audio.addEventListener('timeupdate', () => {
-        if (!audioRef.current) return;
-        if (audioRef.current.currentTime >= SEGMENT_END) {
-          audioRef.current.currentTime = SEGMENT_START;
-        } else if (audioRef.current.currentTime < SEGMENT_START && !audioRef.current.paused) {
-          audioRef.current.currentTime = SEGMENT_START;
-        }
-      });
+      audio.loop = true; // Full song loop without cutting
 
       audio.addEventListener('ended', () => {
         if (!audioRef.current) return;
-        audioRef.current.currentTime = SEGMENT_START;
+        audioRef.current.currentTime = 0;
         audioRef.current.play().catch(() => setIsPlaying(false));
       });
 
@@ -98,11 +84,6 @@ export const SoundtrackControl: React.FC = () => {
 
     const executeAutoplay = async () => {
       if (userExplicitlyPausedRef.current) return;
-
-      // Position to 54s before attempting playback
-      if (audio.currentTime < SEGMENT_START || audio.currentTime >= SEGMENT_END) {
-        audio.currentTime = SEGMENT_START;
-      }
 
       try {
         await audio.play();
@@ -131,23 +112,6 @@ export const SoundtrackControl: React.FC = () => {
         setIsPlaying(false);
       } else {
         userExplicitlyPausedRef.current = false;
-        // Ensure playback starts within [SEGMENT_START, SEGMENT_END]
-        if (audio.readyState >= 1) {
-          if (audio.currentTime < SEGMENT_START || audio.currentTime >= SEGMENT_END) {
-            audio.currentTime = SEGMENT_START;
-          }
-        } else {
-          audio.addEventListener(
-            'loadedmetadata',
-            () => {
-              if (audio.currentTime < SEGMENT_START || audio.currentTime >= SEGMENT_END) {
-                audio.currentTime = SEGMENT_START;
-              }
-            },
-            { once: true }
-          );
-        }
-
         await audio.play();
         setIsPlaying(true);
       }
@@ -187,10 +151,10 @@ export const SoundtrackControl: React.FC = () => {
               fontWeight: 500,
               boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)',
             }}
-            title="Place your authorized MP3 recording at: public/assets/audio/seetha_kalyana_vaibhogame.mp3"
+            title="Place your authorized MP3 recording at: public/assets/audio/weddingsong.mp3"
           >
             <Music size={13} style={{ color: 'var(--gold-champagne)', opacity: 0.7 }} />
-            <span>Soundtrack: Awaiting <code style={{ color: 'var(--gold-champagne)', fontSize: '0.68rem' }}>seetha_kalyana_vaibhogame.mp3</code></span>
+            <span>Soundtrack: Awaiting <code style={{ color: 'var(--gold-champagne)', fontSize: '0.68rem' }}>weddingsong.mp3</code></span>
           </div>
         </aside>
       );
@@ -215,13 +179,13 @@ export const SoundtrackControl: React.FC = () => {
         onMouseLeave={() => setIsHovered(false)}
         aria-label={
           isPlaying
-            ? 'Pause Sita Kalyanam soundtrack'
-            : 'Play Sita Kalyanam soundtrack'
+            ? 'Pause wedding soundtrack'
+            : 'Play wedding soundtrack'
         }
         title={
           isPlaying
-            ? 'Playing: Sita Kalyanam (0:54 – 1:53) — Click to pause'
-            : 'Play Wedding Soundtrack: Sita Kalyanam (Solo)'
+            ? 'Playing: Wedding Song — Click to pause'
+            : 'Play Wedding Soundtrack'
         }
         style={{
           display: 'inline-flex',
@@ -261,7 +225,7 @@ export const SoundtrackControl: React.FC = () => {
                 whiteSpace: 'nowrap',
               }}
             >
-              Sita Kalyanam
+              Thandhaay Song
             </span>
             <div
               style={{

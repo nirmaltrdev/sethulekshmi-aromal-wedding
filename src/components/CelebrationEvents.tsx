@@ -48,8 +48,8 @@ const EventCountdown: React.FC<EventCountdownProps> = ({ targetDate, eventTitle,
   const shortTitle = eventTitle.includes('Muhurtham')
     ? 'Auspicious Muhurtham'
     : eventTitle.includes('Gathering')
-    ? 'Blessing Gathering'
-    : eventTitle;
+      ? 'Blessing Gathering'
+      : eventTitle;
 
   const isGathering = eventTitle.includes('Gathering');
 
@@ -64,8 +64,8 @@ const EventCountdown: React.FC<EventCountdownProps> = ({ targetDate, eventTitle,
     const loc = venue && location
       ? `${venue}, ${location}`
       : isGathering
-      ? 'Suresh Bhavan, Achencovil, Kollam, Kerala'
-      : 'Santhi Auditorium, Eliyarackal, Konni, Pathanamthitta, Kerala 689691';
+        ? 'Suresh Bhavan, Achencovil, Kollam, Kerala'
+        : 'Santhi Auditorium, Eliyarackal, Konni, Pathanamthitta, Kerala 689691';
 
     const icsContent = [
       'BEGIN:VCALENDAR',
@@ -108,8 +108,8 @@ const EventCountdown: React.FC<EventCountdownProps> = ({ targetDate, eventTitle,
     venue && location
       ? `${venue}, ${location}`
       : isGathering
-      ? 'Suresh Bhavan, Achencovil, Kollam, Kerala'
-      : 'Santhi Auditorium, Eliyarackal, Konni, Pathanamthitta, Kerala 689691'
+        ? 'Suresh Bhavan, Achencovil, Kollam, Kerala'
+        : 'Santhi Auditorium, Eliyarackal, Konni, Pathanamthitta, Kerala 689691'
   );
   const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${googleSummary}&dates=${googleDates}&details=${googleDetails}&location=${googleLocation}`;
 
@@ -321,7 +321,7 @@ export const CelebrationEvents: React.FC = () => {
         theme: 'Pastel Ethnic & Kasavu Highlights',
         colors: ['#F5EBE6', '#D6B265', '#98B2AA'],
       },
-      mapUrl: 'https://maps.google.com/?q=Achencovil+Kollam+Kerala',
+      mapUrl: 'https://maps.google.com/?q=9.244347,76.833207',
       badge: 'Familial Blessings',
     },
     {
@@ -503,221 +503,221 @@ export const CelebrationEvents: React.FC = () => {
                   </div>
                 )}
 
-              {/* Event Content Block */}
-              <div
-                style={{
-                  padding: '40px 36px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <div>
+                {/* Event Content Block */}
+                <div
+                  style={{
+                    padding: '40px 36px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        alignItems: 'center',
+                        gap: '10px',
+                        marginBottom: '12px',
+                      }}
+                    >
+                      {!event.photo && (
+                        <span
+                          style={{
+                            fontSize: '0.72rem',
+                            fontFamily: 'var(--font-sans)',
+                            fontWeight: 700,
+                            letterSpacing: '0.18em',
+                            textTransform: 'uppercase',
+                            color: '#235C52',
+                          }}
+                        >
+                          {event.category}
+                        </span>
+                      )}
+                      <span
+                        style={{
+                          fontSize: '0.72rem',
+                          fontFamily: 'var(--font-sans)',
+                          fontWeight: 600,
+                          letterSpacing: '0.12em',
+                          textTransform: 'uppercase',
+                          padding: '4px 10px',
+                          borderRadius: 'var(--radius-full)',
+                          backgroundColor: event.featured
+                            ? 'rgba(214, 178, 101, 0.2)'
+                            : 'rgba(12, 43, 38, 0.06)',
+                          color: event.featured ? '#8C6820' : '#1B4F46',
+                        }}
+                      >
+                        {event.badge}
+                      </span>
+                    </div>
+
+                    <h3
+                      style={{
+                        fontFamily: 'var(--font-editorial)',
+                        fontSize: 'clamp(1.8rem, 3.2vw, 2.4rem)',
+                        color: '#08201D',
+                        margin: '0 0 16px 0',
+                      }}
+                    >
+                      {event.title}
+                    </h3>
+
+                    <p
+                      style={{
+                        fontFamily: 'var(--font-sans)',
+                        fontSize: '0.94rem',
+                        lineHeight: 1.65,
+                        color: '#4A635D',
+                        marginBottom: '26px',
+                      }}
+                    >
+                      {event.description}
+                    </p>
+
+                    {/* Timing & Venue Logistics */}
+                    <div
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                        gap: '16px',
+                        padding: '20px',
+                        backgroundColor: 'var(--cream-pure)',
+                        borderRadius: 'var(--radius-md)',
+                        marginBottom: '24px',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                        <Calendar size={18} style={{ color: '#235C52', marginTop: '2px' }} />
+                        <div>
+                          <div style={{ fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#667C76', fontWeight: 600 }}>
+                            Date
+                          </div>
+                          <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#08201D' }}>
+                            {event.date}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                        <Clock size={18} style={{ color: '#235C52', marginTop: '2px' }} />
+                        <div>
+                          <div style={{ fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#667C76', fontWeight: 600 }}>
+                            Time &amp; Muhurtham
+                          </div>
+                          <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#08201D' }}>
+                            {event.time}
+                          </div>
+                          {event.arrival && (
+                            <div style={{ fontSize: '0.78rem', color: '#8C6820', marginTop: '2px' }}>
+                              {event.arrival}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                        <MapPin size={18} style={{ color: '#235C52', marginTop: '2px' }} />
+                        <div>
+                          <div style={{ fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#667C76', fontWeight: 600 }}>
+                            Venue &amp; Location
+                          </div>
+                          <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#08201D' }}>
+                            {event.venue}
+                          </div>
+                          <div style={{ fontSize: '0.78rem', color: '#667C76' }}>
+                            {event.location}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Live Ceremony Countdown Timer (Only on events with countdownDate, leaving Traditional Feast unchanged) */}
+                    {event.countdownDate && (
+                      <EventCountdown
+                        targetDate={event.countdownDate}
+                        eventTitle={event.title}
+                        venue={event.venue}
+                        location={event.location}
+                      />
+                    )}
+                  </div>
+
+                  {/* Bottom Row: Dress Code Swatches & Google Maps Navigation */}
                   <div
                     style={{
                       display: 'flex',
                       flexWrap: 'wrap',
                       alignItems: 'center',
-                      gap: '10px',
-                      marginBottom: '12px',
+                      justifyContent: 'space-between',
+                      gap: '16px',
+                      paddingTop: '16px',
+                      borderTop: '1px solid rgba(12, 43, 38, 0.08)',
                     }}
                   >
-                    {!event.photo && (
-                      <span
-                        style={{
-                          fontSize: '0.72rem',
-                          fontFamily: 'var(--font-sans)',
-                          fontWeight: 700,
-                          letterSpacing: '0.18em',
-                          textTransform: 'uppercase',
-                          color: '#235C52',
-                        }}
-                      >
-                        {event.category}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                      <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#667C76' }}>
+                        Suggested Attire:
                       </span>
-                    )}
-                    <span
+                      <span style={{ fontSize: '0.82rem', fontWeight: 600, color: '#08201D' }}>
+                        {event.dressCode.theme}
+                      </span>
+                      <div style={{ display: 'flex', gap: '4px' }}>
+                        {event.dressCode.colors.map((c, i) => (
+                          <div
+                            key={i}
+                            style={{
+                              width: '14px',
+                              height: '14px',
+                              borderRadius: '50%',
+                              backgroundColor: c,
+                              border: '1px solid rgba(0, 0, 0, 0.15)',
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    <a
+                      href={event.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       style={{
-                        fontSize: '0.72rem',
-                        fontFamily: 'var(--font-sans)',
-                        fontWeight: 600,
-                        letterSpacing: '0.12em',
-                        textTransform: 'uppercase',
-                        padding: '4px 10px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        padding: '8px 18px',
                         borderRadius: 'var(--radius-full)',
-                        backgroundColor: event.featured
-                          ? 'rgba(214, 178, 101, 0.2)'
-                          : 'rgba(12, 43, 38, 0.06)',
-                        color: event.featured ? '#8C6820' : '#1B4F46',
+                        backgroundColor: 'rgba(12, 43, 38, 0.06)',
+                        color: '#08201D',
+                        fontSize: '0.78rem',
+                        fontFamily: 'var(--font-sans)',
+                        fontWeight: 700,
+                        letterSpacing: '0.08em',
+                        textTransform: 'uppercase',
+                        textDecoration: 'none',
+                        transition: 'all 0.25s ease',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = '#08201D';
+                        e.currentTarget.style.color = '#FFFFFF';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgba(12, 43, 38, 0.06)';
+                        e.currentTarget.style.color = '#08201D';
                       }}
                     >
-                      {event.badge}
-                    </span>
+                      <Navigation size={13} />
+                      Get Directions
+                    </a>
                   </div>
-
-                  <h3
-                    style={{
-                      fontFamily: 'var(--font-editorial)',
-                      fontSize: 'clamp(1.8rem, 3.2vw, 2.4rem)',
-                      color: '#08201D',
-                      margin: '0 0 16px 0',
-                    }}
-                  >
-                    {event.title}
-                  </h3>
-
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-sans)',
-                      fontSize: '0.94rem',
-                      lineHeight: 1.65,
-                      color: '#4A635D',
-                      marginBottom: '26px',
-                    }}
-                  >
-                    {event.description}
-                  </p>
-
-                  {/* Timing & Venue Logistics */}
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-                      gap: '16px',
-                      padding: '20px',
-                      backgroundColor: 'var(--cream-pure)',
-                      borderRadius: 'var(--radius-md)',
-                      marginBottom: '24px',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                      <Calendar size={18} style={{ color: '#235C52', marginTop: '2px' }} />
-                      <div>
-                        <div style={{ fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#667C76', fontWeight: 600 }}>
-                          Date
-                        </div>
-                        <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#08201D' }}>
-                          {event.date}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                      <Clock size={18} style={{ color: '#235C52', marginTop: '2px' }} />
-                      <div>
-                        <div style={{ fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#667C76', fontWeight: 600 }}>
-                          Time &amp; Muhurtham
-                        </div>
-                        <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#08201D' }}>
-                          {event.time}
-                        </div>
-                        {event.arrival && (
-                          <div style={{ fontSize: '0.78rem', color: '#8C6820', marginTop: '2px' }}>
-                            {event.arrival}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                      <MapPin size={18} style={{ color: '#235C52', marginTop: '2px' }} />
-                      <div>
-                        <div style={{ fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#667C76', fontWeight: 600 }}>
-                          Venue &amp; Location
-                        </div>
-                        <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#08201D' }}>
-                          {event.venue}
-                        </div>
-                        <div style={{ fontSize: '0.78rem', color: '#667C76' }}>
-                          {event.location}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Live Ceremony Countdown Timer (Only on events with countdownDate, leaving Traditional Feast unchanged) */}
-                  {event.countdownDate && (
-                    <EventCountdown
-                      targetDate={event.countdownDate}
-                      eventTitle={event.title}
-                      venue={event.venue}
-                      location={event.location}
-                    />
-                  )}
-                </div>
-
-                {/* Bottom Row: Dress Code Swatches & Google Maps Navigation */}
-                <div
-                  style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: '16px',
-                    paddingTop: '16px',
-                    borderTop: '1px solid rgba(12, 43, 38, 0.08)',
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#667C76' }}>
-                      Suggested Attire:
-                    </span>
-                    <span style={{ fontSize: '0.82rem', fontWeight: 600, color: '#08201D' }}>
-                      {event.dressCode.theme}
-                    </span>
-                    <div style={{ display: 'flex', gap: '4px' }}>
-                      {event.dressCode.colors.map((c, i) => (
-                        <div
-                          key={i}
-                          style={{
-                            width: '14px',
-                            height: '14px',
-                            borderRadius: '50%',
-                            backgroundColor: c,
-                            border: '1px solid rgba(0, 0, 0, 0.15)',
-                          }}
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  <a
-                    href={event.mapUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      padding: '8px 18px',
-                      borderRadius: 'var(--radius-full)',
-                      backgroundColor: 'rgba(12, 43, 38, 0.06)',
-                      color: '#08201D',
-                      fontSize: '0.78rem',
-                      fontFamily: 'var(--font-sans)',
-                      fontWeight: 700,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      textDecoration: 'none',
-                      transition: 'all 0.25s ease',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#08201D';
-                      e.currentTarget.style.color = '#FFFFFF';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'rgba(12, 43, 38, 0.06)';
-                      e.currentTarget.style.color = '#08201D';
-                    }}
-                  >
-                    <Navigation size={13} />
-                    Get Directions
-                  </a>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
         </div>
       </div>
 

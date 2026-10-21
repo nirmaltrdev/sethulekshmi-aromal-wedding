@@ -110,7 +110,7 @@ export const weddingContent = {
         title: "Bride's Residence",
         name: "Suresh Bhavan",
         address: "Achencovil, Kollam District, Kerala",
-        mapsUrl: "https://maps.google.com/?q=Achencovil+Kollam+Kerala",
+        mapsUrl: "https://maps.google.com/?q=9.244347,76.833207",
       },
       {
         title: "Groom's Residence",

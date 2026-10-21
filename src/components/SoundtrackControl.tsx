@@ -203,8 +203,8 @@ export const SoundtrackControl: React.FC = () => {
       aria-label="Wedding Soundtrack Player"
       style={{
         position: 'fixed',
-        bottom: 'clamp(20px, 3.5vh, 32px)',
-        right: 'clamp(18px, 3vw, 32px)',
+        bottom: 'clamp(14px, 2.5vh, 28px)',
+        right: 'clamp(14px, 2.5vw, 28px)',
         zIndex: 90,
       }}
     >
@@ -306,6 +306,22 @@ export const SoundtrackControl: React.FC = () => {
         .soundtrack-floating-btn:focus-visible {
           outline: 2px solid var(--gold-champagne);
           outline-offset: 3px;
+        }
+
+        @media (max-width: 768px) {
+          .soundtrack-floating-btn {
+            min-height: 38px !important;
+            padding: 8px 13px !important;
+            gap: 7px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .soundtrack-floating-btn {
+            min-height: 36px !important;
+            padding: 7px 11px !important;
+            gap: 6px !important;
+          }
         }
 
         .soundtrack-eq-bar {

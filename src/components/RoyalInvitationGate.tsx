@@ -42,7 +42,7 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 'clamp(12px, 2.5vh, 28px) clamp(14px, 4vw, 36px)',
+        padding: 'max(14px, env(safe-area-inset-top, 14px)) max(16px, env(safe-area-inset-right, 16px)) max(18px, env(safe-area-inset-bottom, 18px)) max(16px, env(safe-area-inset-left, 16px))',
         backgroundColor: '#031713',
         backgroundImage: `
           radial-gradient(circle at 50% 45%, rgba(20, 68, 58, 0.92) 0%, rgba(5, 26, 22, 0.98) 60%, #020C0A 100%)
@@ -120,18 +120,18 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
-          maxWidth: '680px',
+          maxWidth: 'min(680px, 92vw)',
           width: '100%',
           zIndex: 2,
           margin: 'auto',
-          padding: 'clamp(8px, 1.6vh, 20px) 0',
+          padding: 'clamp(8px, 1.8vh, 22px) 0',
           transition: 'transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), filter 0.85s ease',
           transform: isOpening ? 'scale(1.04) translateY(-10px)' : 'scale(1) translateY(0)',
           filter: isOpening ? 'blur(8px)' : 'none',
         }}
       >
         {/* 1. Auspicious Lord Ganesha Header */}
-        <div className="royal-ganesha-block" style={{ marginBottom: 'clamp(3px, 1vh, 8px)' }}>
+        <div className="royal-ganesha-block" style={{ marginBottom: 'clamp(4px, 1.2vh, 10px)' }}>
           <div
             style={{
               position: 'relative',
@@ -144,8 +144,8 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
             <div
               style={{
                 position: 'absolute',
-                width: '54px',
-                height: '54px',
+                width: 'clamp(44px, 7vh, 58px)',
+                height: 'clamp(44px, 7vh, 58px)',
                 borderRadius: '50%',
                 background: 'radial-gradient(circle, rgba(233, 200, 131, 0.45) 0%, transparent 70%)',
                 filter: 'blur(8px)',
@@ -158,7 +158,7 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
               className="royal-ganesha-img"
               style={{
                 position: 'relative',
-                width: 'clamp(34px, 5vh, 46px)',
+                width: 'clamp(36px, min(5.5vh, 8.5vw), 48px)',
                 height: 'auto',
                 display: 'inline-block',
                 filter: 'drop-shadow(0 3px 10px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 12px rgba(233, 200, 131, 0.55))',
@@ -186,8 +186,8 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
             <span
               className="royal-invocation-malayalam"
               style={{
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: 'clamp(0.70rem, 2.2vw, 0.82rem)',
+                fontFamily: "'Noto Serif Malayalam', 'Manjari', 'Anek Malayalam', 'Cormorant Garamond', Georgia, serif",
+                fontSize: 'clamp(0.72rem, 2.2vw, 0.84rem)',
                 color: 'var(--gold-champagne, #E9C883)',
                 letterSpacing: '0.04em',
                 fontWeight: 500,
@@ -210,11 +210,11 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
             className="royal-invocation-sub"
             style={{
               fontFamily: "'Plus Jakarta Sans', var(--font-sans), sans-serif",
-              fontSize: 'clamp(0.54rem, 1.6vw, 0.62rem)',
+              fontSize: 'clamp(0.56rem, 1.6vw, 0.64rem)',
               fontWeight: 600,
               letterSpacing: '0.22em',
               textTransform: 'uppercase',
-              color: 'rgba(233, 200, 131, 0.82)',
+              color: 'rgba(233, 200, 131, 0.85)',
               marginTop: '3px',
             }}
           >
@@ -230,7 +230,7 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            margin: 'clamp(6px, 1.3vh, 14px) 0',
+            margin: 'clamp(6px, 1.4vh, 16px) 0',
           }}
         >
           {/* Ambient Golden Radial Halo behind Logo */}
@@ -289,15 +289,19 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
         <div
           className="royal-names-wrapper"
           style={{
-            margin: 'clamp(2px, 0.7vh, 8px) 0 clamp(6px, 1.2vh, 12px) 0',
+            margin: 'clamp(2px, 0.8vh, 10px) 0 clamp(6px, 1.4vh, 14px) 0',
             padding: '0 8px',
             width: '100%',
           }}
         >
           <h1 className="royal-gate-title">
-            <span className="royal-gate-name-wrap">Sethulekshmi S</span>
-            <span className="royal-gate-amp-wrap">&amp;</span>
-            <span className="royal-gate-name-wrap">Aromal Kurup</span>
+            <span className="royal-gate-name-group">
+              <span className="royal-gate-name-wrap">Sethulekshmi S</span>
+              <span className="royal-gate-amp-wrap">&amp;</span>
+            </span>
+            <span className="royal-gate-name-wrap royal-gate-second-name">
+              Aromal Kurup
+            </span>
           </h1>
         </div>
 
@@ -310,7 +314,7 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
             justifyContent: 'center',
             gap: '12px',
             width: '100%',
-            maxWidth: '240px',
+            maxWidth: 'min(240px, 60vw)',
             margin: '0 auto clamp(8px, 1.8vh, 16px) auto',
           }}
         >
@@ -369,7 +373,7 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
           />
         </div>
 
-        {/* 5. Glowing Royal Action Button: OPEN ROYAL INVITATION */}
+        {/* 5. Glowing Royal Action Button: OPEN INVITATION */}
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <button
             type="button"
@@ -382,14 +386,20 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
       </div>
 
       <style>{`
-        /* Monogram Responsive Sizing */
+        /* Dynamic Viewport Backdrop Support */
+        .royal-gate-backdrop {
+          min-height: 100vh;
+          min-height: 100dvh;
+        }
+
+        /* Monogram Responsive Sizing: smooth fluid scaling across viewports */
         .royal-monogram-ring {
-          width: clamp(120px, 18vh, 185px);
-          height: clamp(120px, 18vh, 185px);
+          width: clamp(116px, min(18vh, 38vw), 180px);
+          height: clamp(116px, min(18vh, 38vw), 180px);
         }
         .royal-logo-halo {
-          width: clamp(150px, 22vh, 225px);
-          height: clamp(150px, 22vh, 225px);
+          width: clamp(140px, min(22vh, 46vw), 220px);
+          height: clamp(140px, min(22vh, 46vw), 220px);
           animation: logoHaloPulse 4s ease-in-out infinite alternate;
         }
 
@@ -400,9 +410,9 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
           justify-content: center;
           flex-wrap: wrap;
           column-gap: 0.35em;
-          row-gap: 0.1em;
+          row-gap: 0.08em;
           font-family: 'Alex Brush', 'Great Vibes', cursive;
-          font-size: clamp(2.0rem, 5.2vw, 3.6rem);
+          font-size: clamp(2.05rem, min(5.4vw, 5.2vh), 3.5rem);
           line-height: 1.15;
           font-weight: 400;
           color: #FFFFFF;
@@ -414,7 +424,20 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
             0 0 50px rgba(233, 200, 131, 0.15);
         }
 
+        /* Grouping Sethulekshmi S & together so & never gets orphaned */
+        .royal-gate-name-group {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          white-space: nowrap;
+        }
+
         .royal-gate-name-wrap {
+          white-space: nowrap;
+          display: inline-block;
+        }
+
+        .royal-gate-second-name {
           white-space: nowrap;
           display: inline-block;
         }
@@ -423,23 +446,23 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
           font-family: 'Great Vibes', cursive;
           font-size: 0.88em;
           color: var(--gold-champagne, #E9C883);
-          padding: 0 0.1em;
+          padding: 0 0.12em;
           display: inline-block;
         }
 
-        /* Action Button Styling */
+        /* Action Button Styling - Accessible 44-48px touch target */
         .royal-open-invitation-action-btn {
           position: relative;
           display: inline-flex;
           align-items: center;
           justify-content: center;
           gap: 8px;
-          min-height: 42px;
-          padding: clamp(9px, 1.6vh, 12px) clamp(24px, 5.5vw, 34px);
+          min-height: clamp(44px, 5.2vh, 48px);
+          padding: clamp(10px, 1.5vh, 13px) clamp(26px, 5.5vw, 36px);
           background: linear-gradient(180deg, #F8E3A5 0%, #E2BC66 50%, #C6983C 100%);
           color: #07241E;
           font-family: 'Plus Jakarta Sans', var(--font-sans), sans-serif;
-          font-size: clamp(0.72rem, 1.9vw, 0.78rem);
+          font-size: clamp(0.72rem, 1.8vw, 0.78rem);
           font-weight: 750;
           letter-spacing: 0.14em;
           text-transform: uppercase;
@@ -463,6 +486,12 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
           box-shadow: 0 0 45px rgba(226, 188, 102, 0.75), 0 14px 34px rgba(0, 0, 0, 0.65);
           background: linear-gradient(180deg, #FFF0BE 0%, #E8C472 50%, #D1A346 100%);
           border-color: #FFFFFF;
+        }
+
+        .royal-open-invitation-action-btn:focus-visible {
+          outline: 2px solid #FFFFFF;
+          outline-offset: 3px;
+          box-shadow: 0 0 30px rgba(233, 200, 131, 0.8);
         }
 
         .royal-open-invitation-action-btn:active {
@@ -529,32 +558,43 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
           }
         }
 
-        /* Mobile Screens (<= 640px) */
-        @media (max-width: 640px) {
+        /* Tablets and Medium Screens (<= 768px) */
+        @media (max-width: 768px) {
           .royal-starburst {
             display: none;
           }
           .royal-gate-title {
-            flex-direction: column;
-            gap: 0;
-            font-size: clamp(1.85rem, 7.8vw, 2.45rem);
-            line-height: 1.1;
-          }
-          .royal-gate-amp-wrap {
-            font-size: 0.76em;
-            margin: -2px 0;
-            padding: 0;
-          }
-          .royal-monogram-ring {
-            width: clamp(120px, 17vh, 155px);
-            height: clamp(120px, 17vh, 155px);
-          }
-          .royal-logo-halo {
-            width: clamp(140px, 20vh, 185px);
-            height: clamp(140px, 20vh, 185px);
+            font-size: clamp(1.95rem, 6.8vw, 2.5rem);
+            line-height: 1.15;
           }
           .royal-lotus-divider {
-            max-width: 200px;
+            max-width: 210px;
+          }
+        }
+
+        /* Mobile Screens (<= 480px) */
+        @media (max-width: 480px) {
+          .royal-gate-content {
+            padding: 6px 0;
+          }
+          .royal-gate-title {
+            font-size: clamp(1.85rem, 7.2vw, 2.3rem);
+            line-height: 1.12;
+          }
+          .royal-gate-amp-wrap {
+            font-size: 0.82em;
+            padding: 0 0.1em;
+          }
+          .royal-monogram-ring {
+            width: clamp(110px, 34vw, 145px);
+            height: clamp(110px, 34vw, 145px);
+          }
+          .royal-logo-halo {
+            width: clamp(130px, 42vw, 175px);
+            height: clamp(130px, 42vw, 175px);
+          }
+          .royal-lotus-divider {
+            max-width: 180px;
           }
         }
 
@@ -567,37 +607,64 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
             margin-bottom: 2px !important;
           }
           .royal-ganesha-img {
-            width: 30px !important;
+            width: 28px !important;
+          }
+          .royal-invocation-malayalam {
+            font-size: 0.68rem !important;
+          }
+          .royal-invocation-sub {
+            font-size: 0.52rem !important;
+            margin-top: 1px !important;
           }
           .royal-monogram-container {
-            margin: 4px 0 !important;
+            margin: 3px 0 !important;
           }
           .royal-monogram-ring {
-            width: 95px !important;
-            height: 95px !important;
+            width: clamp(85px, 15vh, 105px) !important;
+            height: clamp(85px, 15vh, 105px) !important;
           }
           .royal-logo-halo {
-            width: 120px !important;
-            height: 120px !important;
+            width: clamp(105px, 18vh, 130px) !important;
+            height: clamp(105px, 18vh, 130px) !important;
           }
           .royal-names-wrapper {
-            margin: 2px 0 4px 0 !important;
+            margin: 2px 0 3px 0 !important;
           }
           .royal-gate-title {
-            font-size: 1.65rem !important;
-            flex-direction: row !important;
-            gap: 0.25em !important;
-          }
-          .royal-gate-amp-wrap {
-            margin: 0 !important;
+            font-size: clamp(1.55rem, 4.2vw, 1.85rem) !important;
+            row-gap: 0 !important;
           }
           .royal-lotus-divider {
-            margin: 0 auto 6px auto !important;
+            margin: 0 auto 5px auto !important;
+            max-width: 150px !important;
           }
           .royal-open-invitation-action-btn {
-            min-height: 36px;
-            padding: 6px 20px;
-            font-size: 0.70rem;
+            min-height: 38px !important;
+            padding: 6px 20px !important;
+            font-size: 0.68rem !important;
+          }
+        }
+
+        /* Ultra-narrow devices (<= 340px) */
+        @media (max-width: 340px) {
+          .royal-gate-title {
+            font-size: 1.75rem !important;
+          }
+          .royal-open-invitation-action-btn {
+            padding: 8px 18px !important;
+            font-size: 0.70rem !important;
+          }
+        }
+
+        /* Accessibility: Prefers Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+          .royal-open-invitation-action-btn,
+          .royal-logo-halo,
+          .royal-starburst,
+          .royal-gate-backdrop,
+          .royal-gate-content {
+            animation: none !important;
+            transition: none !important;
           }
         }
       `}</style>

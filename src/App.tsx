@@ -6,6 +6,7 @@ import { VisualJourney } from './components/VisualJourney';
 import { DestinationGuide } from './components/DestinationGuide';
 import { CinematicEpilogue } from './components/CinematicEpilogue';
 import { SoundtrackControl } from './components/SoundtrackControl';
+import { RoyalInvitationGate } from './components/RoyalInvitationGate';
 
 export const App: React.FC = () => {
   return (
@@ -18,6 +19,9 @@ export const App: React.FC = () => {
         color: '#F7F4EE',
       }}
     >
+      {/* Royal Entrance Gate: Opens invitation and unlocks soundtrack seamlessly */}
+      <RoyalInvitationGate />
+
       {/* Main Cinematic Wedding Experience */}
       <main>
         {/* Hero Section & Muhurtham Anchor */}

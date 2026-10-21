@@ -1,164 +1,45 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Music, Volume2, VolumeX } from 'lucide-react';
+import {
+  getSharedAudio,
+  playSoundtrack,
+  pauseSoundtrack,
+  subscribeToPlaybackState,
+} from '../utils/audioManager';
 
 export const SoundtrackControl: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [hasError, setHasError] = useState<boolean>(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const userExplicitlyPausedRef = useRef<boolean>(false);
-  const cleanupListenersRef = useRef<(() => void) | null>(null);
 
-  const audioSrc = '/assets/audio/weddingsong.mp3';
-
-  // Initialize or retrieve the single Audio instance
-  const getOrCreateAudio = (): HTMLAudioElement => {
-    if (!audioRef.current) {
-      const audio = new Audio(audioSrc);
-      audio.volume = 0.65;
-      audio.preload = 'auto';
-      audio.loop = true;
-
-      audio.addEventListener('play', () => {
-        setIsPlaying(true);
-      });
-
-      audio.addEventListener('pause', () => {
-        setIsPlaying(false);
-      });
-
-      audio.addEventListener('ended', () => {
-        if (audioRef.current && !userExplicitlyPausedRef.current) {
-          audioRef.current.currentTime = 0;
-          audioRef.current.play().catch(() => setIsPlaying(false));
-        }
-      });
-
-      audio.addEventListener('error', (e) => {
-        console.warn('Audio playback error:', e);
-        setHasError(true);
-        setIsPlaying(false);
-      });
-
-      audioRef.current = audio;
-    }
-    return audioRef.current;
-  };
-
-  // Autoplay attempt on page load and refresh
+  // Subscribe to playback state changes across the application
   useEffect(() => {
-    const audio = getOrCreateAudio();
-    userExplicitlyPausedRef.current = false;
-    setHasError(false);
-
-    let isStarted = false;
-
-    const interactionEvents: (keyof WindowEventMap)[] = [
-      'pointerdown',
-      'touchstart',
-      'touchend',
-      'mousedown',
-      'click',
-      'keydown',
-    ];
-
-    const removeInteractionListeners = () => {
-      interactionEvents.forEach((evt) => {
-        window.removeEventListener(evt, handleUserInteraction, true);
-        document.removeEventListener(evt, handleUserInteraction, true);
-      });
-      cleanupListenersRef.current = null;
-    };
-
-    const handleUserInteraction = async () => {
-      if (userExplicitlyPausedRef.current || isStarted) {
-        removeInteractionListeners();
-        return;
-      }
-
-      try {
-        audio.currentTime = 0;
-        audio.muted = false;
-        await audio.play();
-        isStarted = true;
-        setIsPlaying(true);
-        removeInteractionListeners();
-      } catch {
-        // Keep listeners active to retry on next user interaction
-      }
-    };
-
-    const attemptAutoplay = async () => {
-      if (userExplicitlyPausedRef.current || isStarted) return;
-
-      try {
-        audio.muted = false;
-        await audio.play();
-        isStarted = true;
-        setIsPlaying(true);
-        removeInteractionListeners();
-      } catch (err) {
-        // Autoplay policy prevented immediate unmuted sound without prior user activation.
-        setIsPlaying(false);
-
-        // Pre-warm audio in muted mode so it's fully loaded and ready to sound instantly on first touch
-        try {
-          if (audio.paused) {
-            audio.muted = true;
-            await audio.play();
-          }
-        } catch {
-          // Standby
-        }
-      }
-    };
-
-    // 1. Attach listeners immediately on mount across window & document
-    interactionEvents.forEach((evt) => {
-      window.addEventListener(evt, handleUserInteraction, { capture: true, passive: true });
-      document.addEventListener(evt, handleUserInteraction, { capture: true, passive: true });
+    const audio = getSharedAudio();
+    const unsubscribe = subscribeToPlaybackState((playing) => {
+      setIsPlaying(playing);
     });
-    cleanupListenersRef.current = removeInteractionListeners;
 
-    // 2. Attempt immediate unmuted playback
-    attemptAutoplay();
-
-    // 3. Re-attempt when audio buffer is ready if it wasn't preloaded
-    const onCanPlay = () => {
-      if (!isStarted && !userExplicitlyPausedRef.current) {
-        attemptAutoplay();
-      }
+    const onError = () => {
+      setHasError(true);
+      setIsPlaying(false);
     };
-    audio.addEventListener('canplay', onCanPlay, { once: true });
+
+    audio.addEventListener('error', onError);
 
     return () => {
-      removeInteractionListeners();
-      audio.removeEventListener('canplay', onCanPlay);
+      unsubscribe();
+      audio.removeEventListener('error', onError);
     };
   }, []);
 
   const toggleSoundtrack = async () => {
-    const audio = getOrCreateAudio();
-
     if (isPlaying) {
       userExplicitlyPausedRef.current = true;
-      if (cleanupListenersRef.current) {
-        cleanupListenersRef.current();
-      }
-      audio.pause();
-      setIsPlaying(false);
+      pauseSoundtrack();
     } else {
       userExplicitlyPausedRef.current = false;
-      try {
-        await audio.play();
-        setIsPlaying(true);
-        if (cleanupListenersRef.current) {
-          cleanupListenersRef.current();
-        }
-      } catch (err) {
-        console.warn('Manual playback error:', err);
-        setIsPlaying(false);
-      }
+      await playSoundtrack();
     }
   };
 

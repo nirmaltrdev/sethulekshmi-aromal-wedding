@@ -289,9 +289,13 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
           }}
         >
           <h1 className="royal-gate-title">
-            <span className="royal-gate-name-wrap">Sethulekshmi S</span>
-            <span className="royal-gate-amp-wrap">&amp;</span>
-            <span className="royal-gate-name-wrap">Aromal Kurup</span>
+            <span className="royal-gate-name-group">
+              <span className="royal-gate-name-wrap">Sethulekshmi S</span>
+              <span className="royal-gate-amp-wrap">&amp;</span>
+            </span>
+            <span className="royal-gate-name-wrap royal-gate-second-name">
+              Aromal Kurup
+            </span>
           </h1>
         </div>
 
@@ -361,7 +365,7 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
           />
         </div>
 
-        {/* 5. Glowing Royal Action Button: OPEN ROYAL INVITATION */}
+        {/* 5. Glowing Royal Action Button: OPEN INVITATION */}
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <button
             type="button"
@@ -444,7 +448,7 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
           justify-content: center;
           flex-wrap: wrap;
           column-gap: 0.35em;
-          row-gap: 0.1em;
+          row-gap: 0.08em;
           font-family: 'Alex Brush', 'Great Vibes', cursive;
           /* Sized so both names + ampersand always fit on one balanced row (~12.8em wide) */
           font-size: clamp(1.6rem, min(4.2vw, 7vh), 3.6rem);
@@ -459,7 +463,20 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
             0 0 50px rgba(233, 200, 131, 0.15);
         }
 
+        /* Grouping Sethulekshmi S & together so & never gets orphaned */
+        .royal-gate-name-group {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          white-space: nowrap;
+        }
+
         .royal-gate-name-wrap {
+          white-space: nowrap;
+          display: inline-block;
+        }
+
+        .royal-gate-second-name {
           white-space: nowrap;
           display: inline-block;
         }
@@ -468,11 +485,11 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
           font-family: 'Great Vibes', cursive;
           font-size: 0.88em;
           color: var(--gold-champagne, #E9C883);
-          padding: 0 0.1em;
+          padding: 0 0.12em;
           display: inline-block;
         }
 
-        /* Action Button Styling */
+        /* Action Button Styling - Accessible 44-48px touch target */
         .royal-open-invitation-action-btn {
           position: relative;
           display: inline-flex;
@@ -484,7 +501,7 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
           background: linear-gradient(180deg, #F8E3A5 0%, #E2BC66 50%, #C6983C 100%);
           color: #07241E;
           font-family: 'Plus Jakarta Sans', var(--font-sans), sans-serif;
-          font-size: clamp(0.72rem, 1.9vw, 0.78rem);
+          font-size: clamp(0.72rem, 1.8vw, 0.78rem);
           font-weight: 750;
           letter-spacing: 0.14em;
           text-transform: uppercase;
@@ -515,6 +532,12 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
         .royal-open-invitation-action-btn:focus-visible {
           outline: 2px solid #FFF4D0;
           outline-offset: 4px;
+        }
+
+        .royal-open-invitation-action-btn:focus-visible {
+          outline: 2px solid #FFFFFF;
+          outline-offset: 3px;
+          box-shadow: 0 0 30px rgba(233, 200, 131, 0.8);
         }
 
         .royal-open-invitation-action-btn:active {
@@ -581,32 +604,43 @@ export const RoyalInvitationGate: React.FC<RoyalInvitationGateProps> = ({ onOpen
           }
         }
 
-        /* Mobile Screens (<= 640px) */
-        @media (max-width: 640px) {
+        /* Tablets and Medium Screens (<= 768px) */
+        @media (max-width: 768px) {
           .royal-starburst {
             display: none;
           }
           .royal-gate-title {
-            flex-direction: column;
-            gap: 0;
-            font-size: clamp(1.85rem, 7.8vw, 2.45rem);
-            line-height: 1.1;
-          }
-          .royal-gate-amp-wrap {
-            font-size: 0.76em;
-            margin: -2px 0;
-            padding: 0;
-          }
-          .royal-monogram-ring {
-            width: clamp(120px, 17vh, 155px);
-            height: clamp(120px, 17vh, 155px);
-          }
-          .royal-logo-halo {
-            width: clamp(140px, 20vh, 185px);
-            height: clamp(140px, 20vh, 185px);
+            font-size: clamp(1.95rem, 6.8vw, 2.5rem);
+            line-height: 1.15;
           }
           .royal-lotus-divider {
-            max-width: 200px;
+            max-width: 210px;
+          }
+        }
+
+        /* Mobile Screens (<= 480px) */
+        @media (max-width: 480px) {
+          .royal-gate-content {
+            padding: 6px 0;
+          }
+          .royal-gate-title {
+            font-size: clamp(1.85rem, 7.2vw, 2.3rem);
+            line-height: 1.12;
+          }
+          .royal-gate-amp-wrap {
+            font-size: 0.82em;
+            padding: 0 0.1em;
+          }
+          .royal-monogram-ring {
+            width: clamp(110px, 34vw, 145px);
+            height: clamp(110px, 34vw, 145px);
+          }
+          .royal-logo-halo {
+            width: clamp(130px, 42vw, 175px);
+            height: clamp(130px, 42vw, 175px);
+          }
+          .royal-lotus-divider {
+            max-width: 180px;
           }
         }
 
